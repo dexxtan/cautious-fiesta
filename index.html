@@ -1,6 +1,4 @@
-<html>
-<head>
-<script src="angular.min.js"></script>
+<html ng-app="todoListApp">
 <style>
 html {
   font-size: 62.5%;
@@ -69,14 +67,39 @@ ul {
   padding: 1.2rem;
 }
 </style>
+<script src="angular.min.js"></script>
+<script>
+var todoListApp = angular.module('todoListApp', []);
+
+todoListApp.controller('TodoListController', function TodoListController($scope) {
+  $scope.newProject = '';
+
+  // prefill arrays with some elements
+  $scope.todos = ['Project 1', 'Project 2', 'Project 3', 'Project 4'];
+  $scope.inProgresses = ['Project 5', 'Project 6', 'Project 7'];
+  $scope.dones = ['Project 8', 'Project 9', 'Project 10', 'Project 11', 'Project 12'];
+
+  $scope.handleKeyEvents = function(event) {
+    // enter key
+    if (event.keyCode === 13) {
+      $scope.addNewProject();
+    }
+  }
+
+  $scope.addNewProject = function() {
+    $scope.todos.push($scope.newProject);
+    $scope.newProject = '';
+  }
+});
+</script>
 </head>
-<body>
+<body ng-controller="TodoListController">
   <div class="main">
     <div class="top container">
       <div class="input-label container">add project</div>
-      <div class="input container"><input type="text" /></div>
+      <div class="input container"><input type="text" ng-model="newProject" ng-keypress="handleKeyEvents($event)"/></div>
       <div class="total-counter container">TOTAL
-        <div class="project-counter">1</div>
+        <div class="project-counter">{{todos.length + inProgresses.length + dones.length}}</div>
       </div>
     </div>
     <div class="body container">
@@ -86,7 +109,7 @@ ul {
             <h3>To do</h3>
             <div class="project-counter">1</div>
           </li>
-          <li>Project 1</li>
+          <li ng-repeat="todo in todos">{{todo}}</li>
         </ul>
       </div>
       <div class="project-list container">
@@ -95,7 +118,7 @@ ul {
             <h3>In Progress</h3>
             <div class="project-counter">1</div>
           </li>
-          <li>Project 1</li>
+          <li ng-repeat="inProgress in inProgresses">{{inProgress}}</li>
         </ul>
       </div>
       <div class="project-list container">
@@ -104,7 +127,7 @@ ul {
             <h3>Done</h3>
             <div class="project-counter">1</div>
           </li>
-          <li>Project 1</li>
+          <li ng-repeat="done in dones">{{done}}</li>
         </ul>
       </div>
     </div>
