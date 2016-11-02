@@ -1,0 +1,113 @@
+<html>
+<head>
+<script src="angular.min.js"></script>
+<style>
+html {
+  font-size: 62.5%;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.main {
+  background-color: lightgray;
+  font-family: sans-serif;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+.container {
+  padding: 0.6rem;
+}
+.top, .body {
+  display: flex;
+}
+.input-label {
+  text-align: right;
+  width: 10%;
+}
+.input {
+  width: 90%;
+}
+.total-counter {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 10%;
+}
+.project-counter {
+  align-items: center;
+  background-color: white;
+  border-radius: 0.4rem;
+  box-shadow: inset 0.1rem 0.1rem 0.2rem 0.1rem rgba(0,0,0,0.3);
+  color: black;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
+  padding: 0.6rem;
+}
+.project-counter::after {
+  color: gray;
+  content: 'projects';
+  font-weight: normal;
+  text-transform: uppercase;
+}
+.project-list {
+  width: calc(100%/3);
+}
+.project-list li {
+  background-color: white;
+  padding: 2.4rem 1.2rem;
+  margin-bottom: 0.2rem;
+}
+.project-list .header {
+  align-items: center;
+  background-color: gray;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.2rem;
+}
+</style>
+</head>
+<body>
+  <div class="main">
+    <div class="top container">
+      <div class="input-label container">add project</div>
+      <div class="input container"><input type="text" /></div>
+      <div class="total-counter container">TOTAL
+        <div class="project-counter">1</div>
+      </div>
+    </div>
+    <div class="body container">
+      <div class="project-list container">
+        <ul>
+          <li class="header">
+            <h3>To do</h3>
+            <div class="project-counter">1</div>
+          </li>
+          <li>Project 1</li>
+        </ul>
+      </div>
+      <div class="project-list container">
+        <ul>
+          <li class="header">
+            <h3>In Progress</h3>
+            <div class="project-counter">1</div>
+          </li>
+          <li>Project 1</li>
+        </ul>
+      </div>
+      <div class="project-list container">
+        <ul>
+          <li class="header">
+            <h3>Done</h3>
+            <div class="project-counter">1</div>
+          </li>
+          <li>Project 1</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
