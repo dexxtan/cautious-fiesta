@@ -1,0 +1,12 @@
+{
+  "name": "cautious-fiesta",
+  "version": "1.0.0",
+  "description": "a fiesta of cautious code",
+  "main": "index.html",
+  "dependencies": {
+    "angular": "^1.5.8"
+  },
+  "devDependencies": {},
+  "author": "Dexter Tan",
+  "license": "ISC"
+}
