@@ -32,7 +32,7 @@ function breakDownAuth(string) {
   var authParams = string.split(':');
   if (authParams.length > 1) {
     this.userName = authParams[0];
-    this.password = authParams[1]; 
+    this.password = authParams[1];
   }
   return;
 }
@@ -61,18 +61,20 @@ function breakDownPath(string) {
 }
 
 function breakDownQueryString(string) {
-  var queryParams = string.split('&');
-  var currentQuerySplit;
-  var queryHash = {};
-  for (var i = 0; i < queryParams.length; i++) {
-    currentQuerySplit = queryParams[i].split('=');
-    queryHash[currentQuerySplit[0]] = currentQuerySplit[1];
+  if (typeof string === 'string') {
+    var queryParams = string.split('&');
+    var currentQuerySplit;
+    var queryHash = {};
+    for (var i = 0; i < queryParams.length; i++) {
+      currentQuerySplit = queryParams[i].split('=');
+      queryHash[currentQuerySplit[0]] = currentQuerySplit[1];
+    }
+    var queryArray = [];
+    for (var i in queryHash) {
+      queryArray.push(i + '=' + queryHash[i]);
+    }
+    queryArray.sort();
+    this.queryParams = queryArray.join('&');
   }
-  var queryArray = [];
-  for (var i in queryHash) {
-    queryArray.push(i + '=' + queryHash[i]);
-  }
-  queryArray.sort();
-  this.queryParams = queryArray.join('&'); 
   return;
 }

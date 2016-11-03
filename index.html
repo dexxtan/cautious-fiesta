@@ -1,97 +1,10 @@
 <html ng-app="todoListApp">
-<style>
-html {
-  font-size: 62.5%;
-}
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.main {
-  background-color: lightgray;
-  font-family: sans-serif;
-  font-size: 1.6rem;
-  font-weight: bold;
-}
-.container {
-  padding: 0.6rem;
-}
-.top, .body {
-  display: flex;
-}
-.input-label {
-  text-align: right;
-  width: 10%;
-}
-.input {
-  width: 90%;
-}
-.total-counter {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  width: 10%;
-}
-.project-counter {
-  align-items: center;
-  background-color: white;
-  border-radius: 0.4rem;
-  box-shadow: inset 0.1rem 0.1rem 0.2rem 0.1rem rgba(0,0,0,0.3);
-  color: black;
-  display: flex;
-  flex-direction: column;
-  font-size: 1.2rem;
-  padding: 0.6rem;
-}
-.project-counter::after {
-  color: gray;
-  content: 'projects';
-  font-weight: normal;
-  text-transform: uppercase;
-}
-.project-list {
-  width: calc(100%/3);
-}
-.project-list li {
-  background-color: white;
-  padding: 2.4rem 1.2rem;
-  margin-bottom: 0.2rem;
-}
-.project-list .header {
-  align-items: center;
-  background-color: gray;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  padding: 1.2rem;
-}
-</style>
-<script src="angular.min.js"></script>
-<script>
-var todoListApp = angular.module('todoListApp', []);
-
-todoListApp.controller('TodoListController', function TodoListController($scope) {
-  $scope.newProject = '';
-
-  // prefill arrays with some elements
-  $scope.todos = ['Project 1', 'Project 2', 'Project 3', 'Project 4'];
-  $scope.inProgresses = ['Project 5', 'Project 6', 'Project 7'];
-  $scope.dones = ['Project 8', 'Project 9', 'Project 10', 'Project 11', 'Project 12'];
-
-  $scope.handleKeyEvents = function(event) {
-    // enter key
-    if (event.keyCode === 13) {
-      $scope.addNewProject();
-    }
-  }
-
-  $scope.addNewProject = function() {
-    $scope.todos.push($scope.newProject);
-    $scope.newProject = '';
-  }
-});
-</script>
+<head>
+  <link href="main.css" rel="stylesheet">
+  <script src="angular.min.js"></script>
+  <script src="script.js"></script>
+  <script src="checkURIs.js"></script>
+  <script src="compress.js"></script>
 </head>
 <body ng-controller="TodoListController">
   <div class="main">
@@ -107,27 +20,30 @@ todoListApp.controller('TodoListController', function TodoListController($scope)
         <ul>
           <li class="header">
             <h3>To do</h3>
-            <div class="project-counter">1</div>
+            <div class="project-counter">{{todos.length}}</div>
           </li>
-          <li ng-repeat="todo in todos">{{todo}}</li>
+          <li ng-repeat="todo in todos" id="todos-{{$index}}" todo-draggable todo-droppable transfer-to-index="transferToIndex()">{{todo}}</li>
+          <li id="todos-{{todos.length}}" class="last-placeholder" todo-droppable>&nbsp;</li>
         </ul>
       </div>
       <div class="project-list container">
         <ul>
           <li class="header">
             <h3>In Progress</h3>
-            <div class="project-counter">1</div>
+            <div class="project-counter">{{inProgresses.length}}</div>
           </li>
-          <li ng-repeat="inProgress in inProgresses">{{inProgress}}</li>
+          <li ng-repeat="inProgress in inProgresses" id="inProgresses-{{$index}}" todo-draggable todo-droppable transfer-to-index="transferToIndex()">{{inProgress}}</li>
+          <li id="inProgresses-{{inProgresses.length}}" class="last-placeholder" todo-droppable>&nbsp;</li>
         </ul>
       </div>
       <div class="project-list container">
         <ul>
           <li class="header">
             <h3>Done</h3>
-            <div class="project-counter">1</div>
+            <div class="project-counter">{{dones.length}}</div>
           </li>
-          <li ng-repeat="done in dones">{{done}}</li>
+          <li ng-repeat="done in dones" id="dones-{{$index}}" todo-draggable todo-droppable transfer-to-index="transferToIndex()">{{done}}</li>
+          <li id="dones-{{dones.length}}" class="last-placeholder" todo-droppable>&nbsp;</li>
         </ul>
       </div>
     </div>
